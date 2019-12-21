@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="AppLogic\" />
   </ItemGroup>
 
   <ItemGroup>
