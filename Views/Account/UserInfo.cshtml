@@ -1,0 +1,20 @@
+﻿@model WebApplication.ViewModels.VMUserAndRoles
+@{
+    ViewData["Title"] = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Test</h1>
+
+<div class="content">
+    <div data-name="EMail"><p>e-mail: @Model.EMail</p></div>
+    <div data-name="FName"><p>Имя: @Model.FName</p></div>
+    <div data-name="LName"><p>Фамилия: @Model.LName</p></div>
+    
+    <h3>Роли:</h3>
+    @foreach(var i in Model.UserRoles)
+    {
+        <div data-role="@i.Key"><p>@i.Key:@i.Value</p></div>
+    }
+    <a asp-controller="Account" asp-action="Change" asp-route-ID="@Model.ID">Изменить пользователя...</a>
+</div>

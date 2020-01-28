@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace WebApplication
 {
     public class Startup
@@ -21,6 +24,21 @@ namespace WebApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<TestDB>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("TestDB"));
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "AuthenticationCookie";
+                    options.Cookie.MaxAge = TimeSpan.FromDays(3.5);
+
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login");
+                });
+
             services.AddControllersWithViews();
         }
 
@@ -38,6 +56,7 @@ namespace WebApplication
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -45,6 +64,14 @@ namespace WebApplication
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "registaration",
+                    pattern: "/Registaration");
+
+                endpoints.MapControllerRoute(
+                    name: "login",
+                    pattern: "/Login");
             });
         }
     }

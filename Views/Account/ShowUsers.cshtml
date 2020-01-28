@@ -1,0 +1,12 @@
+﻿@model List<WebApplication.ViewModels.VMAllUsers>
+@{
+    ViewData["Title"] = "ShowUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ShowUsers</h1>
+
+@foreach (var i in Model)
+{
+    <p>Пользователь: @i.EMail @i.FName @i.LName <a asp-action="UserInfo" asp-route-user="@i.ID">Детальнее...</a></p>
+}
