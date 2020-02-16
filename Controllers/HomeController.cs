@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
         public IActionResult Index()
         {
             var DB = HttpContext.RequestServices.GetService(typeof(MyShopDB)) as MyShopDB;
-            if(DB.User.FirstOrDefault()==null)
+            if (DB.User.FirstOrDefault() == null)
             {
                 var Route = Url.RouteUrl("adduser", null, "http");
                 HttpContext.Response.Headers.Add("REFRESH", $"5;{Route}");
@@ -31,20 +31,11 @@ namespace WebApplication.Controllers
         }
 
 
-        [Authorize]
-        [Route("/Privacy")]
-        public IActionResult Privacy()
+        [Authorize(Policy = "OnlyForLogistic")]
+        [Authorize(Roles = "Salller")]
+        public IActionResult Logistic()
         {
-            var res = new StringBuilder();
-            string type = "";
-
-            foreach (var i in User.Claims)
-            {
-                type = i.Type.Split('/').Last();
-                res.Append($"{i.Type.Split('/').Last()}: {i.Value}\n");
-            }
-
-            return Content(res.ToString());
+            return View();
         }
     }
 }

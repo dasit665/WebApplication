@@ -42,9 +42,9 @@ namespace WebApplication
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("OnlyForMailLogistic", policy =>
+                options.AddPolicy("OnlyForLogistic", policy =>
                 {
-                    policy.RequireClaim(ClaimTypes.Email, "logistic.one@some.mail, logistic.two@some.mail");
+                    policy.RequireClaim(ClaimTypes.Email, "logistic.one@some.mail", "logistic.two@some.mail");
                 });
             });
         }
@@ -87,6 +87,10 @@ namespace WebApplication
                 def.MapControllerRoute(
                     name: "useradmining",
                     pattern: "/UsersAdmining");
+
+                def.MapControllerRoute(
+                    name: "logistic",
+                    pattern: "/Home/Logistic");
 
             });
 
