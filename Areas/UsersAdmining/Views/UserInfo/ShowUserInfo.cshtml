@@ -1,0 +1,31 @@
+﻿@model WebApplication.Areas.UsersAdmining.VMModels.VMUsersAdmining
+@{
+    ViewData["Title"] = "ShowUserInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ShowUserInfo</h1>
+
+<div class="user-first-name">
+    <label asp-for="FName"></label><span>: @Model.FName</span>
+</div>
+
+<div class="user-last-name">
+    <label asp-for="LName"></label><span>: @Model.LName</span>
+</div>
+
+<div class="user-email-name">
+    <label asp-for="EMail"></label><span>: @Model.EMail</span>
+</div>
+
+<div class="user-email-name">
+    <span>Роли:</span>
+    <ul style="list-style-type:none">
+        @foreach (var i in Model.Roles)
+        {
+            <li>@i.Key: @i.Value</li>
+        }
+    </ul>
+</div>
+<a asp-route="edituser" asp-route-id="@Model.ID">Изменить... </a>
+<a asp-route="deleteuser" asp-route-id="@Model.ID">Удалить... </a>

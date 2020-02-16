@@ -1,0 +1,28 @@
+﻿@model WebApplication.Areas.Login.ViewModels.VMLogin
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+
+<div asp-validation-summary="All"></div>
+
+<form name="mainForm" method="post">
+
+    <div class="email">
+        <label asp-for="EMail"></label>
+        <input asp-for="EMail" />
+        <span asp-validation-for="EMail"></span>
+    </div>
+
+    <div class="password">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <button type="submit">Отправить</button>
+    <button type="reset">Очистить</button>
+
+</form>

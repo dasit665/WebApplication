@@ -1,4 +1,40 @@
-﻿@{
+﻿@using System.Security.Claims
+@{
     ViewData["Title"] = "Index";
+    var roles = User.Claims.Where(w => w.Type == ClaimTypes.Role).ToList();
+    bool UserIsAdmin = false;
+
+    foreach (var i in roles)
+    {
+        if (i.Value == "Admin")
+        {
+            UserIsAdmin = true;
+        }
+    }
 }
-<h3>Hello world</h3>
+<h3>Главная страница, текущий пользователь: @(User.Identity.IsAuthenticated ? User.Identity.Name : "Аноним")</h3>
+
+@if (User.Identity.IsAuthenticated == false)
+{
+    <div>
+        <a asp-route="login">Войти...</a>
+    </div>
+}
+else
+{
+    <div>
+        <a href="/Logout">Выйти...</a>
+    </div>
+}
+
+
+<div>
+    <a asp-route="adduser">Создать пользавателя...</a>
+</div>
+
+@if (UserIsAdmin == true)
+{
+    <div>
+        <a asp-route="useradmining">Информация и управление пользавателями...</a>
+    </div>
+}

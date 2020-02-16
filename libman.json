@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap4@0.0.1-security",
+      "destination": "wwwroot/bootstrap4/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@4.4.1",
+      "destination": "wwwroot/bootstrap/"
+    }
+  ]
+}

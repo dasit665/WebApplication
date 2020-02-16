@@ -1,0 +1,18 @@
+﻿@model List<WebApplication.Areas.UsersAdmining.VMModels.VMUsersAdmining>
+@{
+    ViewData["Title"] = "AllUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AllUsers</h1>
+
+@foreach (var i in Model)
+{
+    <div class="user-info">
+        <span>@i.EMail @i.FName @i.LName</span>
+        <a asp-route="showuserinfo" asp-route-id="@i.ID">Подробнее</a>
+    </div>
+}
+<div>
+    <a asp-route="home">На главную...</a>
+</div>

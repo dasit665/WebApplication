@@ -1,0 +1,43 @@
+﻿@model WebApplication.Areas.UsersAdmining.VMModels.VMUsersAdmining
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditUser</h1>
+
+<div asp-validation-summary="All"></div>
+<form name="mainForm" method="post" asp-route="edituser">
+
+    <div class="class-email">
+        <label asp-for="EMail"></label>
+        <input asp-for="EMail" />
+        <span asp-validation-for="EMail"></span>
+    </div>
+
+    <div class="class-fname">
+        <label asp-for="FName"></label>
+        <input asp-for="FName" />
+        <span asp-validation-for="FName"></span>
+    </div>
+
+    <div class="class-lname">
+        <label asp-for="LName"></label>
+        <input asp-for="LName" />
+        <span asp-validation-for="FName"></span>
+    </div>
+
+    <div class="class-roles">
+        <ul>
+            @foreach (var i in Model.Roles)
+            {
+                <li>@i.Key <input type="checkbox" asp-for="@Model.Roles[i.Key]"  checked="@i.Value"/></li>
+            }
+        </ul>
+    </div>
+
+    <input type="hidden" asp-for="ID" value="@Model.ID" />
+
+    <button type="submit">Отправить</button>
+
+</form>

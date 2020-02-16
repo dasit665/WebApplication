@@ -1,0 +1,44 @@
+﻿@model VMAddUser
+@{
+    ViewData["Title"] = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AddUser</h1>
+<div asp-validation-summary="All"></div>
+
+<form name="mainForm" method="post">
+
+    <div id="eMail">
+        <label asp-for="EMail"></label>
+        <input asp-for="EMail" />
+        <span asp-validation-for="EMail"></span>
+    </div>
+
+    <div id="fName">
+        <label asp-for="FName"></label>
+        <input asp-for="FName" />
+        <span asp-validation-for="FName"></span>
+    </div>
+
+    <div id="lName">
+        <label asp-for="LName"></label>
+        <input asp-for="LName" />
+        <span asp-validation-for="LName"></span>
+    </div>
+
+    <div id="password">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div id="confirmPassword">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" />
+        <span asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <button type="submit">Отправить</button>
+    <button type="reset">Очистить</button>
+</form>
