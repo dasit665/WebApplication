@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\Logistic.ts" />
+    <Compile Remove="ViewModels\**" />
+    <Content Remove="ViewModels\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <None Remove="ViewModels\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <Content Remove="wwwroot\js\ContentFunctions.ts" />
+    <Content Remove="wwwroot\js\Logistic.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\js\ContentFunctions.ts" />
     <TypeScriptCompile Include="wwwroot\js\Logistic.ts" />
   </ItemGroup>
 

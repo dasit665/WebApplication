@@ -1,29 +1,42 @@
-﻿
+﻿import { Content } from "./ContentFunctions.js"
 
-let LeftPanel = document.querySelector(".left-panel");
-let RigthPanel = document.querySelector(".rigth-panel");
-let Result = document.querySelector("result");
-
-
-LeftPanel.addEventListener("click", (e) =>
+function ActivatePanel(element: HTMLElement): void
 {
-    LeftPanel.classList.add("active");
-    RigthPanel.classList.remove("active");
-    Result.textContent = "Left";
-    console.log(this);
+    PlanFact.classList.remove("active");
+    Fact.classList.remove("active");
 
-});
+    element.classList.add("active");
+}
 
-RigthPanel.addEventListener("click", (e) =>
+async function ContentAdd(element: HTMLElement)
 {
-    RigthPanel.classList.add("active");
-    LeftPanel.classList.remove("active");
-    Result.textContent = "Rigth";
-    console.log(this);
-});
+    Result.childNodes.forEach(s => s.remove());
+    await Content.GetAllCities().then(t => Result.appendChild(t));
 
-(function main(): void
+    document.querySelector("select")
+        .addEventListener("change", function (e) { console.log(this.value); });
+}
+
+function Switch()
 {
-    LeftPanel.classList.add("active");
-    Result.textContent = "Left";
+    ActivatePanel(this);
+    ContentAdd(this);
+}
+
+
+const Result = document.querySelector("result");
+
+const PlanFact = document.querySelector("#pFact");
+const Fact = document.querySelector("#fact");
+
+PlanFact.addEventListener("click", Switch);
+Fact.addEventListener("click", Switch);
+
+
+
+
+(async function main()
+{
+    ActivatePanel(PlanFact as HTMLElement);
+    ContentAdd(PlanFact as HTMLElement);
 })();

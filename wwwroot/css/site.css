@@ -52,10 +52,11 @@ content {
     background-color: bisque;
 }
 
-result
-{
-    width:90%;
-    height:48rem;
-    background-color:bisque;
+result {
+    display: grid;
     align-self:center;
+    width: 90%;
+    height: 48rem;
+    padding: 2rem 2rem;
+    background-color: bisque;
 }

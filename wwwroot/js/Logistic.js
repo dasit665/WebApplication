@@ -1,25 +1,26 @@
-let LeftPanel = document.querySelector(".left-panel");
-let RigthPanel = document.querySelector(".rigth-panel");
-let Result = document.querySelector("result");
-//let Content = document.createDocumentFragment();
-//let Data = document.createElement("div");
-//Data.innerText = "Some div";
-//Data.classList.add("some-class");
-//Content.appendChild(Data);
-LeftPanel.addEventListener("click", (e) => {
-    LeftPanel.classList.add("active");
-    RigthPanel.classList.remove("active");
-    Result.textContent = "Left";
-    console.log(this);
-});
-RigthPanel.addEventListener("click", (e) => {
-    RigthPanel.classList.add("active");
-    LeftPanel.classList.remove("active");
-    Result.textContent = "Rigth";
-    console.log(this);
-});
-(function main() {
-    LeftPanel.classList.add("active");
-    Result.textContent = "Left";
+import { Content } from "./ContentFunctions.js";
+function ActivatePanel(element) {
+    PlanFact.classList.remove("active");
+    Fact.classList.remove("active");
+    element.classList.add("active");
+}
+async function ContentAdd(element) {
+    Result.childNodes.forEach(s => s.remove());
+    await Content.GetAllCities().then(t => Result.appendChild(t));
+    document.querySelector("select")
+        .addEventListener("change", function (e) { console.log(this.value); });
+}
+function Switch() {
+    ActivatePanel(this);
+    ContentAdd(this);
+}
+const Result = document.querySelector("result");
+const PlanFact = document.querySelector("#pFact");
+const Fact = document.querySelector("#fact");
+PlanFact.addEventListener("click", Switch);
+Fact.addEventListener("click", Switch);
+(async function main() {
+    ActivatePanel(PlanFact);
+    ContentAdd(PlanFact);
 })();
 //# sourceMappingURL=Logistic.js.map

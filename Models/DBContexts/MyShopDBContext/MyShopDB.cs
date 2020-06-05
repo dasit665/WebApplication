@@ -15,16 +15,56 @@ namespace WebApplication
         {
         }
 
+        public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<Direction> Direction { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {            
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.ToTable("City", "Logistic");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CityName)
+                    .IsRequired()
+                    .HasMaxLength(64);
+            });
+
+            modelBuilder.Entity<Direction>(entity =>
+            {
+                entity.ToTable("Direction", "Logistic");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("DATE")
+                    .HasColumnType("date")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.CityFromNavigation)
+                    .WithMany(p => p.DirectionCityFromNavigation)
+                    .HasForeignKey(d => d.CityFrom)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_From");
+
+                entity.HasOne(d => d.CityToNavigation)
+                    .WithMany(p => p.DirectionCityToNavigation)
+                    .HasForeignKey(d => d.CityTo)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_To");
+            });
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.ToTable("Role", "Users");
